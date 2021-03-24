@@ -48,7 +48,7 @@ namespace ChangeIP
             this.LblIpAddress = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.LblAbout = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -239,7 +239,7 @@ namespace ChangeIP
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.LblAbout);
             this.groupBox5.Location = new System.Drawing.Point(299, 146);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(152, 92);
@@ -247,15 +247,17 @@ namespace ChangeIP
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "About";
             // 
-            // label5
+            // LblAbout
             // 
-            this.label5.Enabled = false;
-            this.label5.Location = new System.Drawing.Point(7, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(139, 64);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "© Ivan Mazzoli\r\n2020 - 2021\r\nSource on GitHub.com";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblAbout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LblAbout.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.LblAbout.Location = new System.Drawing.Point(7, 19);
+            this.LblAbout.Name = "LblAbout";
+            this.LblAbout.Size = new System.Drawing.Size(139, 64);
+            this.LblAbout.TabIndex = 0;
+            this.LblAbout.Text = "© Ivan Mazzoli\r\n2020 - 2021\r\nSource on GitHub.com";
+            this.LblAbout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LblAbout.Click += new System.EventHandler(this.LblAbout_Click);
             // 
             // MainForm
             // 
@@ -299,7 +301,7 @@ namespace ChangeIP
         private System.Windows.Forms.Label LblIpAddress;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label LblAbout;
         private System.Windows.Forms.Button BtnMitsubishi;
         private System.Windows.Forms.TextBox TxtCustomIP;
         private System.Windows.Forms.Button BtnSiemensComar;

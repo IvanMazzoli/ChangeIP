@@ -282,5 +282,12 @@ namespace ChangeIP
             // Imposto l'indirizzo IP statico scelto
             SetStaticIP(ipAddress);
         }
+
+        // Metodo per gestire il click sull'about
+        private void LblAbout_Click(object sender, EventArgs e)
+        {
+            // Apro la pagina GitHub del progetto
+            Process.Start(new ProcessStartInfo { FileName = "https://github.com/IvanMazzoli/ChangeIP", UseShellExecute = true });
+        }
     }
 }
