@@ -34,7 +34,7 @@ namespace ChangeIP
             this.AdaptersComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.BtnSiemensComar = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.BtnDHCP = new System.Windows.Forms.Button();
             this.BtnSiemens = new System.Windows.Forms.Button();
             this.BtnLenzeFirst = new System.Windows.Forms.Button();
             this.BtnLenze = new System.Windows.Forms.Button();
@@ -89,7 +89,7 @@ namespace ChangeIP
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.BtnSiemensComar);
-            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.BtnDHCP);
             this.groupBox2.Controls.Add(this.BtnSiemens);
             this.groupBox2.Controls.Add(this.BtnLenzeFirst);
             this.groupBox2.Controls.Add(this.BtnLenze);
@@ -111,14 +111,15 @@ namespace ChangeIP
             this.BtnSiemensComar.UseVisualStyleBackColor = true;
             this.BtnSiemensComar.Click += new System.EventHandler(this.BtnSiemensComar_Click);
             // 
-            // button5
+            // BtnDHCP
             // 
-            this.button5.Location = new System.Drawing.Point(7, 51);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "DHCP";
-            this.button5.UseVisualStyleBackColor = true;
+            this.BtnDHCP.Location = new System.Drawing.Point(7, 51);
+            this.BtnDHCP.Name = "BtnDHCP";
+            this.BtnDHCP.Size = new System.Drawing.Size(75, 23);
+            this.BtnDHCP.TabIndex = 4;
+            this.BtnDHCP.Text = "DHCP";
+            this.BtnDHCP.UseVisualStyleBackColor = true;
+            this.BtnDHCP.Click += new System.EventHandler(this.BtnDHCP_Click);
             // 
             // BtnSiemens
             // 
@@ -292,7 +293,7 @@ namespace ChangeIP
         private System.Windows.Forms.Button BtnLenzeFirst;
         private System.Windows.Forms.Button BtnLenze;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button BtnDHCP;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button BtnCustomIP;
         private System.Windows.Forms.GroupBox groupBox4;

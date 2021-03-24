@@ -112,7 +112,7 @@ namespace ChangeIP
             IPInterfaceProperties properties = adapter.GetIPProperties();
 
             // Itero gli UnicastAddresses
-            String ipAddress = "SCOLLEGATO";
+            String ipAddress = "Non Disponibile";
             foreach (UnicastIPAddressInformation ip in properties.UnicastAddresses)
             {
                 // Se l'Address Family dell'indirizzo è InterNetwork leggo l'IP address
@@ -211,6 +211,67 @@ namespace ChangeIP
 
             // Aggiorno le info sull' adattatore
             DisplayNetworkAdapterInformations(AdaptersComboBox.SelectedIndex);
+        }
+
+        // Metodo per aggiornare l'IP a DHCP
+        private void BtnDHCP_Click(object sender, EventArgs e)
+        {
+            // Setto il cursore di caricamento
+            Cursor.Current = Cursors.WaitCursor;
+
+            // Ottengo le info sull'adattatore di rete scelto
+            NetworkInterface networkInterface = networkAdapters[AdaptersComboBox.SelectedIndex].Value;
+
+            // Creo un processo netsh per configurare l'IP in DHCP e lo avvio
+            Process process = new Process
+            {
+                StartInfo = new ProcessStartInfo("netsh", $"interface ip set address \"{networkInterface.Name}\" dhcp") { Verb = "runas" }
+            };
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            process.WaitForExit();
+
+            // Ottengo l'exit code del processo - 0 = OK
+            bool successful = process.ExitCode == 0;
+            process.Dispose();
+
+            // Se sono uscito dal processo in modo anomalo mi fermo
+            if (!successful)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show("Impossibile impostare l'IP in DHCP per l'adattatore di rete scelto", "Errore netsh", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Creo un processo netsh per configurare i DNS in DHCP e lo avvio
+            process = new Process
+            {
+                StartInfo = new ProcessStartInfo("netsh", $"interface ip set dns \"{networkInterface.Name}\" dhcp") { Verb = "runas" }
+            };
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            process.WaitForExit();
+
+            // Ottengo l'exit code del processo
+            successful = process.ExitCode == 0;
+            process.Dispose();
+
+            // Se sono uscito dal processo in modo anomalo mi fermo
+            if (!successful)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show("Impossibile impostare l'IP in DHCP per l'adattatore di rete scelto", "Errore netsh", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Aggiorno le info mostrare a video
+            DisplayNetworkAdapterInformations(AdaptersComboBox.SelectedIndex);
+
+            // Mostro popup di avviso IP modificato
+            MessageBox.Show("Scheda \"" + networkAdapters[AdaptersComboBox.SelectedIndex].Name + "\" modificata con indirizzo IP dinamico", 
+                "Modifica indirizzo IP", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // Metodo per aggiornare l'IP a Mitsubishi
