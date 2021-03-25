@@ -31,7 +31,7 @@ namespace ChangeIP
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.BoxSaveAdapter = new System.Windows.Forms.CheckBox();
             this.AdaptersComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.BtnSiemensComar = new System.Windows.Forms.Button();
@@ -59,7 +59,7 @@ namespace ChangeIP
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.BoxSaveAdapter);
             this.groupBox1.Controls.Add(this.AdaptersComboBox);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -68,15 +68,15 @@ namespace ChangeIP
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Adattatore di rete";
             // 
-            // checkBox1
+            // BoxSaveAdapter
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 53);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(159, 19);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Ricorda adattatore di rete";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.BoxSaveAdapter.AutoSize = true;
+            this.BoxSaveAdapter.Location = new System.Drawing.Point(7, 53);
+            this.BoxSaveAdapter.Name = "BoxSaveAdapter";
+            this.BoxSaveAdapter.Size = new System.Drawing.Size(159, 19);
+            this.BoxSaveAdapter.TabIndex = 1;
+            this.BoxSaveAdapter.Text = "Ricorda adattatore di rete";
+            this.BoxSaveAdapter.UseVisualStyleBackColor = true;
             // 
             // AdaptersComboBox
             // 
@@ -273,6 +273,7 @@ namespace ChangeIP
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "ChangeIP";
             this.groupBox1.ResumeLayout(false);
@@ -289,7 +290,7 @@ namespace ChangeIP
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox BoxSaveAdapter;
         private System.Windows.Forms.ComboBox AdaptersComboBox;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button BtnSiemens;

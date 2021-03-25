@@ -29,6 +29,11 @@ namespace ChangeIP
             // Centro il form a schermo
             this.CenterToParent();
 
+            // Se ho un indirizzo custom usato in precedenza lo setto
+            string lastCustomIP = Properties.Settings.Default.LastCustomIP;
+            if (lastCustomIP != "")
+                TxtCustomIP.Text = lastCustomIP;
+
             // Creo la lista di definizioni indirizzi IP
             CreateNetworkAddresses();
 
@@ -59,10 +64,18 @@ namespace ChangeIP
             // Imposto il ComboBox come sola lettura
             AdaptersComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            // Ottengo l'adattatore e se ho un adattatore salvato lo scelgo
+            string savedAdapter = Properties.Settings.Default.SavedAdapter;
+            if (savedAdapter != "")
+            {
+                NetworkAdapter adapter = networkAdapters.Where(i => i.Name == savedAdapter).FirstOrDefault();
+                AdaptersComboBox.SelectedIndex = networkAdapters.IndexOf(adapter);
+                BoxSaveAdapter.Checked = true;
+                return;
+            }
+
             // Aggiorno le info con IP e info configurazione
             DisplayNetworkAdapterInformations(0);
-
-            // TODO: CHECK SE HO UN SALVA ADATTATORE
         }
 
         // Metodo per ottenere una lista di adattatori di rete
@@ -197,6 +210,13 @@ namespace ChangeIP
             // Aggiorno le info mostrare a video
             DisplayNetworkAdapterInformations(AdaptersComboBox.SelectedIndex);
 
+            // Se ho selezionato il salva adattatore lo salvo
+            if (BoxSaveAdapter.Checked)
+            {
+                Properties.Settings.Default.SavedAdapter = networkAdapters[AdaptersComboBox.SelectedIndex].Name;
+                Properties.Settings.Default.Save();
+            }
+
             // Mostro popup di avviso IP modificato
             MessageBox.Show("Scheda \"" + networkAdapters[AdaptersComboBox.SelectedIndex].Name + "\" modificata con indirizzo IP statico " 
                 + ipAddress, "Modifica indirizzo IP", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -268,6 +288,13 @@ namespace ChangeIP
 
             // Aggiorno le info mostrare a video
             DisplayNetworkAdapterInformations(AdaptersComboBox.SelectedIndex);
+
+            // Se ho selezionato il salva adattatore lo salvo
+            if (BoxSaveAdapter.Checked)
+            {
+                Properties.Settings.Default.SavedAdapter = networkAdapters[AdaptersComboBox.SelectedIndex].Name;
+                Properties.Settings.Default.Save();
+            }
 
             // Mostro popup di avviso IP modificato
             MessageBox.Show("Scheda \"" + networkAdapters[AdaptersComboBox.SelectedIndex].Name + "\" modificata con indirizzo IP dinamico", 
@@ -342,6 +369,10 @@ namespace ChangeIP
 
             // Imposto l'indirizzo IP statico scelto
             SetStaticIP(ipAddress);
+
+            // Salvo l'indirizzo IP scritto dall'utente
+            Properties.Settings.Default.LastCustomIP = ipAddress;
+            Properties.Settings.Default.Save();
         }
 
         // Metodo per gestire il click sull'about
